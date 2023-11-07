@@ -101,3 +101,161 @@ def aes_encrypt(data, key):
     # Join blocks
     return join_blocks(blocks)
 ```
+
+#### 3.2.2 Firefox Lockwise
+
+Firefox Lockwise est un gestionnaire de mot de passe intégré à Firefox. Il permet de stocker des mots de passe de manière sécurisée dans une base de données chiffrée. Il est disponible sur Windows, Linux, macOS, Android et iOS. La base de données est chiffrée avec AES-256.
+
+#### 3.2.3 Dashlane
+
+Dashlane est un gestionnaire de mot de passe propriétaire. Il permet de stocker des mots de passe de manière sécurisée dans une base de données chiffrée. Il est disponible sur Windows, Linux, macOS, Android et iOS.
+La base de données est chiffrée également avec AES-256.
+
+_On remarque que le chiffrement AES, particulièrement AES-256, est très utilisé dans les gestionnaires de mot de passe._
+
+## 4. Robustesse des mots de passe
+
+### 4.1 Introduction
+
+Dans la plupart des cas, les mots de passe sont stockés dans une base de données. Il est donc important de les chiffrer pour éviter qu'ils ne soient compromis en cas de fuite de données. De ce postulat on hash les mots de passe. La quasi-totalité des librairies fournissant des méthodes pour hasher un mot de passe ne fournissent que une méthode pour hasher un mot de passe, et une seconde pour comparer un texte avec un hash. L'encryption n'est alord qu'unilatérale, on ne peut pas décrypter un hash pour retrouver le mot de passe.
+
+**Exemple :**
+
+```js
+// Javascript
+
+const bcrypt = require("bcrypt");
+
+// Salt rounds représente le nombre de tours de hashage
+const saltRounds = 10;
+const myPassword = "password";
+
+// Hash le mot de passe
+const hash = bcrypt.hashSync(myPassword, saltRounds);
+
+// Compare le mot de passe avec le hash
+const isTheGoodPassword = bcrypt.compareSync(myPassword, hash);
+```
+
+```js
+/**
+ * @Notice
+ * La méthode `compare` agit uniquement en tant que raccourcis à un code équivalent à:
+ */
+const compareSyncSimplified(hashedPass, pass) {
+    const hashedInput = bcrypt.hashSync(pass, saltRounds);
+    // Retourne true si les deux hash sont identiques
+    return hashedInput === hashedPass;
+}
+```
+
+### 4.2 Entropie
+
+#### 4.2.1 Définition
+
+L'entropie est une mesure de la quantité d'information contenue dans un message. Elle est exprimée en bits. Plus un message est complexe, plus son entropie est élevée.
+
+#### 4.2.2 Calcul de l'entropie
+
+L'entropie d'un message peut être calculée à l'aide de la formule suivante :
+
+$$ H = - \sum\_{i=1}^{n} p_i \log_2 p_i $$
+
+Où $p_i$ est la probabilité d'apparition du symbole $i$ dans le message.
+
+#### 4.2.3 Exemple
+
+Soit le message suivant :
+
+$$ M = "abracadabra" $$
+$$ n = 11 $$
+$$ p*a = \frac{5}{11} $$
+$$ p_b = \frac{2}{11} $$
+$$ p_c = \frac{1}{11} $$
+$$ p_d = \frac{1}{11} $$
+$$ p_r = \frac{2}{11} $$
+$$ p*{\text{espace}} = \frac{0}{11} $$
+$$ p\_{\text{autres}} = \frac{0}{11} $$
+
+$$ H = - \sum\_{i=1}^{n} p_i \log_2 p_i $$
+
+$$ H = - \left( \frac{5}{11} \log_2 \frac{5}{11} + \frac{2}{11} \log_2 \frac{2}{11} + \frac{1}{11} \log_2 \frac{1}{11} + \frac{1}{11} \log_2 \frac{1}{11} + \frac{2}{11} \log_2 \frac{2}{11} + \frac{0}{11} \log_2 \frac{0}{11} + \frac{0}{11} \log_2 \frac{0}{11} \right) $$
+
+$$ H = - \left( \frac{5}{11} \times -2.3219 + \frac{2}{11} \times -2.8074 + \frac{1}{11} \times -3.3219 + \frac{1}{11} \times -3.3219 + \frac{2}{11} \times -2.8074 + \frac{0}{11} \times -\infty + \frac{0}{11} \times -\infty \right) $$
+
+$$ H = - \left( -1.0608 - 0.5116 - 0.3019 - 0.3019 - 0.5116 \right) $$
+
+$$ H = - \left( -2.6878 \right) $$
+
+$$ H = 2.6878 $$
+
+L'entropie du message $M$ est de $2.6878$ bits.
+
+**Ordre de grandeur de l'entropie**
+
+| Entropie | Exemple                                                                        |
+| -------- | ------------------------------------------------------------------------------ |
+| 0        | Message composé d'un seul symbole                                              |
+| 1        | Message composé de deux symboles ayant la même probabilité d'apparition        |
+| 2        | Message composé de quatre symboles ayant la même probabilité d'apparition      |
+| 3        | Message composé de huit symboles ayant la même probabilité d'apparition        |
+| 4        | Message composé de seize symboles ayant la même probabilité d'apparition       |
+| 5        | Message composé de trente-deux symboles ayant la même probabilité d'apparition |
+
+Donc notre message $M$ a une entropie de $2.6878$ bits, ce qui est relativement faible.
+
+#### 4.2.4 Entropie de Shannon
+
+L'entropie de Shannon est une mesure de l'entropie d'un message. Elle est exprimée en bits. Plus un message est complexe, plus son entropie de Shannon est élevée. elle gère également le cas où un symbole n'apparait pas dans le message, c'est à dire un cas il exclut les termes relatifs aux caractères absents.
+
+<kbd>[Cf. A. de `main.ipynb`](main.ipynb#a-calcul-de-lentropie)</kbd>
+
+### 4.3 Complexité
+
+#### 4.3.1 Définition
+
+La complexité d'un mot de passe est une mesure de la difficulté à le deviner. Elle est exprimée en bits. Plus un mot de passe est complexe, plus sa complexité est élevée.
+
+#### 4.3.2 Calcul de la complexité
+
+La complexité d'un mot de passe peut être calculée à l'aide de la formule suivante :
+
+$$ C = \log_2 \left( \frac{1}{p} \right) $$
+
+Où $p$ est la probabilité de deviner le mot de passe.
+
+#### 4.3.3 Exemple
+
+Soit le mot de passe suivant :
+
+$$ M = "abracadabra" $$
+$$ n = 11 $$
+$$ p*a = \frac{5}{11} $$
+$$ p_b = \frac{2}{11} $$
+$$ p_c = \frac{1}{11} $$
+$$ p_d = \frac{1}{11} $$
+$$ p_r = \frac{2}{11} $$
+$$ p*{\text{espace}} = \frac{0}{11} $$
+$$ p\_{\text{autres}} = \frac{0}{11} $$
+
+$$ C = \log_2 \left( \frac{1}{p} \right) $$
+$$ C = \log_2 \left( \frac{1}{\frac{5}{11}} \right) $$
+$$ C = \log_2 \left( \frac{11}{5} \right) $$
+$$ C = \log_2 \left( 2.2 \right) $$
+$$ C = 2.1375 $$
+$$ C = 2.1375 \text{ bits} $$
+
+La complexité du mot de passe $M$ est de $2.1375$ bits.
+
+**Ordre de grandeur de la complexité**
+
+| Complexité | Exemple                                                                             |
+| ---------- | ----------------------------------------------------------------------------------- |
+| 0          | Mot de passe composé d'un seul symbole                                              |
+| 1          | Mot de passe composé de deux symboles ayant la même probabilité d'apparition        |
+| 2          | Mot de passe composé de quatre symboles ayant la même probabilité d'apparition      |
+| 3          | Mot de passe composé de huit symboles ayant la même probabilité d'apparition        |
+| 4          | Mot de passe composé de seize symboles ayant la même probabilité d'apparition       |
+| 5          | Mot de passe composé de trente-deux symboles ayant la même probabilité d'apparition |
+
+Donc notre mot de passe $M$ a une complexité de $2.1375$ bits, ce qui est relativement faible.
