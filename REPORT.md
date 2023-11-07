@@ -247,6 +247,8 @@ $$ C = 2.1375 \text{ bits} $$
 
 La complexité du mot de passe $M$ est de $2.1375$ bits.
 
+<kbd>[Cf. A. de `main.ipynb`](main.ipynb#b-calcul-de-la-complexité)</kbd>
+
 **Ordre de grandeur de la complexité**
 
 | Complexité | Exemple                                                                             |
