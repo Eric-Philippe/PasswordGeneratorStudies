@@ -247,7 +247,7 @@ $$ C = 2.1375 \text{ bits} $$
 
 La complexité du mot de passe $M$ est de $2.1375$ bits.
 
-<kbd>[Cf. A. de `main.ipynb`](main.ipynb#b-calcul-de-la-complexité)</kbd>
+<kbd>[Cf. B. de `main.ipynb`](main.ipynb#b-calcul-de-la-complexité)</kbd>
 
 **Ordre de grandeur de la complexité**
 
@@ -261,3 +261,49 @@ La complexité du mot de passe $M$ est de $2.1375$ bits.
 | 5          | Mot de passe composé de trente-deux symboles ayant la même probabilité d'apparition |
 
 Donc notre mot de passe $M$ a une complexité de $2.1375$ bits, ce qui est relativement faible.
+
+## 5. Générateurs de nombres pseudo-aléatoires
+
+**Lexique :**
+
+- `PRNG` - Pseudo-Random-Number-Generator (_Générateur de nombres pseudos-aléatoires_)
+- `LGC` - Linear Congruential Generators (_Générateurs congruentiels linéaires_)
+
+### 5.1 Générateurs congruentiels linéaires
+
+#### 5.1.1 Définition
+
+Le générateur congruentiel linéaire est un des plus anciens générateurs de nombres pseudo-aléatoires mais pour autant très simple à comprendre; il est basé sur une suite récurrente linéaire définie par la relation de récurrence suivante :
+
+$$ X\_{n+1} = (aX_n + c) \mod m $$
+
+C'est à dire :
+
+- Multiplier le nombre précédent par un nombre $a$.
+- Ajouter un nombre $c$.
+- Prendre le reste de la division euclidienne par un nombre $m$.
+
+<kbd>[Cf. C.1 de `main.ipynb`](main.ipynb#C-générateurs-congruentiels-linéaires)</kbd>
+
+Avec le LCG, on peut remarquer certains problèmes :
+
+- Tous les nombres sont impairs, nous ne touchons donc pas du tout uniformément tous les nombres (tout modèle observable étant l'antithèse du hasard).
+
+- La taille de l'échantillon est très limitée - on peut remarquer qu'on boucle sur les mêmes nombres.
+
+Tous ces problèmes sont issues des paramètres entrés dans le LCG. C'est ici qu'intervient sa version plus récente qu'est le LCG Drand48
+
+<kbd>[Cf. C.2 de `main.ipynb`](main.ipynb#C.2-fonction-de-génération-de-nombres-aléatoires-lcg-drand48)</kbd>
+
+Dans le `Drand48 LCG`, nous n'obtenons pas seulement le numéro suivant dans la séquence, ici nous décalons tous les bits de 16 places vers la droite, les 16 bits les plus à droite étant supprimés en conséquence.
+
+Exemple de shift de bits :
+
+```py
+# Si nous avons `1017 >> 3`
+    # 1017 = 11 1111 1001 en base 2
+    # Avec le shift de 3 bits vers la droite, nous obtenons : 111 1111
+    # qui représente 127 en base 10
+
+# Le shift de bits aide à avoir un générateur 16 bits avec une sortie de 8 bits
+```
