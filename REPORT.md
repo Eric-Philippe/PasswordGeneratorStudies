@@ -5,6 +5,7 @@
 ### 1.1
 
 Ce document relate le compte-rendu du sujet de Modélisation Mathématiques de la troisième année de BUT Informatique de l'IUT de Blagnac.
+Il sera appuyé par le fichier `main.ipynb` qui contient toutes les sources utilisées pour la réalisation de ce document.
 
 ### 1.2 Consignes
 
@@ -39,11 +40,12 @@ Vous expliquerez et conduirez des tests statistiques pour qualifier les nombres 
 
 #### 3.1.2. Les pratiques à adopter
 
-| Pratique                                 | Explication                                                                       | Exemple                                                                                                     |
-| ---------------------------------------- | --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| Utiliser un générateur de mot de passe   | Les générateurs de mot de passe génèrent des mots de passe aléatoires             | Utiliser des services navigateurs comme Firefox Lockwise ou des services en ligne comme LastPass ou KeePass |
-| Utiliser un gestionnaire de mot de passe | Les gestionnaires de mot de passe stockent les mots de passe de manière sécurisée | Utiliser différents services comme Dashlane, LastPass ou KeePass                                            |
-| Utiliser la double authentification      | La double authentification permet de sécuriser les comptes                        | Utiliser la double authentification à l'aide de services comme Authy ou Google Authenticator                |
+| Pratique                                       | Explication                                                                       | Exemple                                                                                                     |
+| ---------------------------------------------- | --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Utiliser un générateur de mot de passe         | Les générateurs de mot de passe génèrent des mots de passe aléatoires             | Utiliser des services navigateurs comme Firefox Lockwise ou des services en ligne comme LastPass ou KeePass |
+| Utiliser un gestionnaire de mot de passe       | Les gestionnaires de mot de passe stockent les mots de passe de manière sécurisée | Utiliser différents services comme Dashlane, LastPass ou KeePass                                            |
+| Utiliser la double authentification            | La double authentification permet de sécuriser les comptes                        | Utiliser la double authentification à l'aide de services comme Authy ou Google Authenticator                |
+| Faire un mot de passe de plus de 12 caractères | Les mots de passe longs sont plus difficiles à crackés                            | Utiliser des mots de passe de plus de 12 caractères                                                         |
 
 ### 3.2 Présentation d'outils de gestion
 
