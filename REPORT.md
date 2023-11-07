@@ -126,7 +126,7 @@ Dans la plupart des cas, les mots de passe sont stockés dans une base de donné
 
 const bcrypt = require("bcrypt");
 
-// Salt rounds représente le nombre de tours de hashage
+// Le salage rajoute une information aléatoire au mot de passe pour éviter les attaques par dictionnaire
 const saltRounds = 10;
 const myPassword = "password";
 
