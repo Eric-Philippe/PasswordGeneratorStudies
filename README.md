@@ -12,6 +12,8 @@ Vous expliquerez et conduirez des tests statistiques pour qualifier les nombres 
 
 Merci de vous référer au fichier `REPORT.md` pour le compte-rendu.
 
+# Bibliographie
+
 # Lancer le code
 
 Afin de lancer le code, il vous faut Python 3.6+, et un serveur [Jupyter](https://jupyter.org/).
