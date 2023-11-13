@@ -11,3 +11,4 @@
 - [ ] Génération de nombre aléatoires dans les systèmes d'exploitation
 - [ ] Expliquer et conduire des tests statistiques
 - [ ] Parler des TRNG (True Random Number Generator)
+- [ ] Faire un test de khi-deux pour les lcgs
