@@ -6,9 +6,9 @@
 - [x] Notion d'entropie
 - [x] Notion de complexité
 - [x] Principaux générateurs de nombres pseudo-aléatoires
-    - [ ] Parler de la génération de nombres aléatoires dans les langages de programmation
-- [ ] Y ajouter des exemples
+    - [x] Parler de la génération de nombres aléatoires dans les langages de programmation
+    - [x] Expliquer et conduire des tests statistiques
+    - [x] Faire un test de khi-deux pour les lcgs
+    - [x] Y ajouter des exemples
 - [ ] Génération de nombre aléatoires dans les systèmes d'exploitation
-- [ ] Expliquer et conduire des tests statistiques
 - [ ] Parler des TRNG (True Random Number Generator)
-- [ ] Faire un test de khi-deux pour les lcgs
