@@ -10,9 +10,17 @@ Vous expliquerez et conduirez des tests statistiques pour qualifier les nombres 
 
 # Compte-Rendu
 
-Merci de vous référer au fichier `REPORT.md` pour le compte-rendu.
+Merci de vous référer au fichier [Notebook Jupyter](report.ipynb) pour le compte-rendu.
 
 # Bibliographie
+
+- [KeePass](https://keepass.info/)
+- [Unix random numbers](https://lwn.net/Kernel/Index/#Random_numbers)
+- [Khi deux](https://fr.wikipedia.org/wiki/Test_du_%CF%87%C2%B2)
+- [LCG](https://fr.wikipedia.org/wiki/Algorithme_congruentiel_lin%C3%A9aire)
+- [LCG](https://en.wikipedia.org/wiki/Linear_congruential_generator)
+- [Lava Lamp Encryption](https://www.cloudflare.com/learning/ssl/lava-lamp-encryption/)
+- [Advanced Encryption Standard](https://csrc.nist.gov/files/pubs/fips/197/final/docs/fips-197.pdf)
 
 # Lancer le code
 
@@ -25,12 +33,6 @@ Afin de lancer le code, il vous faut Python 3.6+, et un serveur [Jupyter](https:
 # puis lancez le serveur avec
 > jupyter notebook.
 
-# Une page web devrait s'ouvrir, cliquez sur le fichier `main.ipynb`
+# Une page web devrait s'ouvrir, cliquez sur le fichier `report.ipynb`
 # et lancez les cellules avec le bouton "Run" ou en appuyant sur Shift+Enter
 ```
-
-# Personnal Notes
-
-GCL (Java) : https://docs.oracle.com/javase/8/docs/api/java/util/Random.html
-Théorème de Hull
-Khi deux
